@@ -2,6 +2,12 @@ import { ADD_CHILD, DELETE_CHILD, EDIT_CHILD } from '../constants/actionTypes'
 
 const initialState = [];
 
+const getSiblings = (state, action) => {
+  return state.filter(child =>
+    child.first !== action.child.first
+  )
+}
+
 const children = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CHILD:
@@ -10,18 +16,16 @@ const children = (state = initialState, action) => {
         action.child
       ]
     case DELETE_CHILD:
-      const siblings = state.filter(child =>
-        child.first !== action.child.first
-      )
+      const a = getSiblings(state, action);
       return [
-        ...siblings
+        ...a
       ]
     case EDIT_CHILD:
-     const siblings = state.filter(child =>
+     const b = state.filter(child =>
         child.first !== action.child.first
       )
       return [
-        ...siblings,
+        ...b,
         action.child
       ]
     default:
