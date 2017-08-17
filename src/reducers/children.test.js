@@ -7,9 +7,7 @@ describe('children reducer', () => {
   const initialState_1_child = [initialChild];
 
   it('should handle initial state', () => {
-    expect(
-      children(undefined, {})
-    ).toEqual([])
+    expect(children(undefined, {})).toEqual([])
   })
 
   it('should handle ADD_CHILD with a valid child object', () => {
@@ -38,7 +36,7 @@ describe('children reducer', () => {
         type: types.DELETE_CHILD,
         child: initialChild
       });
-    
+
     expect(result).toEqual([]);
   })
 
@@ -49,7 +47,7 @@ describe('children reducer', () => {
         type: types.EDIT_CHILD,
         child: updatedChild
       });
-    
+
     expect(result).toEqual([updatedChild]);
   })
 

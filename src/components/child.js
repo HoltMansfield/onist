@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { editChild, deleteChild } from '../actions'
+import { editChild, deleteChild, setQuestionState } from '../actions'
 
 class Child extends Component {
   constructor(props) {
@@ -16,10 +16,12 @@ class Child extends Component {
 
   save() {
     this.props.dispatch(editChild(this.props.child))
+    this.props.dispatch(setQuestionState(false))
   }
 
   cancel() {
     this.props.dispatch(deleteChild(this.props.child))
+    this.props.dispatch(setQuestionState(true))
   }
 
   render() {
