@@ -1,8 +1,9 @@
 import children from './children'
 import * as types from '../constants/ActionTypes'
+import guidMaker from '../services/guid'
 
 describe('children reducer', () => {
-  const initialChild = { first: 'Homer', last: 'Simpson' };
+  const initialChild = { first: 'Homer', last: 'Simpson', id: guidMaker.make() };
   const emptyInitialState = [];
   const initialState_1_child = [initialChild];
 
@@ -11,7 +12,7 @@ describe('children reducer', () => {
   })
 
   it('should handle ADD_CHILD with a valid child object', () => {
-    const expectedChild = { first: 'DeMar', last: 'DeRozan' };
+    const expectedChild = { first: 'DeMar', last: 'DeRozan', id: guidMaker.make() };
     const result = children(emptyInitialState,
       {
         type: types.ADD_CHILD,

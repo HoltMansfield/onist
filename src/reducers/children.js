@@ -4,7 +4,7 @@ const initialState = [];
 
 const getSiblings = (state, action) => {
   return state.filter(child =>
-    child.first !== action.child.first
+    child.id !== action.child.id
   )
 }
 
@@ -16,16 +16,12 @@ const children = (state = initialState, action) => {
         action.child
       ]
     case DELETE_CHILD:
-      const a = getSiblings(state, action);
       return [
-        ...a
+        ...getSiblings(state, action)
       ]
     case EDIT_CHILD:
-     const b = state.filter(child =>
-        child.first !== action.child.first
-      )
       return [
-        ...b,
+        ...getSiblings(state, action),
         action.child
       ]
     default:

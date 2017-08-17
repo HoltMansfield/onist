@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addChild, setQuestionState } from '../actions'
+import { addChild } from '../actions'
 import guidMaker from '../services/guid'
 
 class Question extends Component {
   constructor(props) {
     super(props)
     this.handleYesClicked = this.handleYesClicked.bind(this)
-    this.getDisplayState = this.getDisplayState.bind(this)
+  }
+
+  getNewChild() {
+    return {
+      id: guidMaker.make(),
+      firstName: '',
+      lastName: ''
+    }
   }
 
   handleYesClicked(e) {
-    this.props.dispatch(addChild({ id: guidMaker.make() }))
-    this.props.dispatch(setQuestionState(false))
-  }
-
-  getDisplayState() {
-    if(this.props.showQuestion) {
-      return { display: 'block' };
-    }
-
-    return { display: 'none' };
+    this.props.dispatch(addChild(this.getNewChild()))
+    e.target.checked = false
   }
 
   getCaption() {
@@ -32,9 +31,8 @@ class Question extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
-      <div style={this.getDisplayState()}>
+      <div>
         <span>{this.getCaption()}</span>
         <input type="radio" name="yesNo" value="1" onClick={this.handleYesClicked}/>
         <span>Yes</span>
@@ -47,7 +45,6 @@ class Question extends Component {
 
 export default connect(
   state => ({
-    showQuestion: state.questionState,
     numberOfChildren: state.children.length
   })
 )(Question)

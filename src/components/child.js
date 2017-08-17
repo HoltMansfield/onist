@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { editChild, deleteChild, setQuestionState } from '../actions'
+import { editChild, deleteChild } from '../actions'
 
 class Child extends Component {
   constructor(props) {
@@ -8,20 +8,36 @@ class Child extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.save = this.save.bind(this)
     this.cancel = this.cancel.bind(this)
+    this.state = {
+      showButtons: true,
+      child: this.props.child
+    }
   }
 
   handleChange(event) {
     this.props.child[event.target.name] = event.target.value
+    this.setState({
+      child: this.props.child
+    })
   }
 
   save() {
     this.props.dispatch(editChild(this.props.child))
-    this.props.dispatch(setQuestionState(false))
+    this.setState({
+      showButtons: false
+    })
   }
 
   cancel() {
     this.props.dispatch(deleteChild(this.props.child))
-    this.props.dispatch(setQuestionState(true))
+  }
+
+  getButtonDisplay() {
+    if(this.state.showButtons) {
+      return { display: 'block' }
+    }
+
+    return { display: 'none' }
   }
 
   render() {
@@ -32,17 +48,17 @@ class Child extends Component {
           <input type="text"
                  name="firstName"
                  placeholder="First Name"
-                 value={this.props.child.firstName}
+                 value={this.state.child.firstName}
                  onChange={this.handleChange} />
         </div>
         <div>
           <input type="text"
                  name="lastName"
                  placeholder="Last Name"
-                 value={this.props.child.lastName}
+                 value={this.state.child.lastName}
                  onChange={this.handleChange} />
         </div>
-        <div>
+        <div style={this.getButtonDisplay()}>
           <button onClick={this.cancel}>Cancel</button>
           <button onClick={this.save}>Save</button>
         </div>
