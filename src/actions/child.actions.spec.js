@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes'
 import * as actions from './'
 
-describe('todo actions', () => {
+describe('child actions', () => {
   it('addChild should create ADD_CHILD action', () => {
     const expectedChild = {};
 
