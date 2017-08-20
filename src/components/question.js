@@ -34,7 +34,7 @@ class Question extends Component {
     return (
       <div>
         <span>{this.getCaption()}</span>
-        <input type="radio" name="yesNo" value="1" onClick={this.handleYesClicked}/>
+        <input className="caption" type="radio" name="yesNo" value="1" onClick={this.handleYesClicked}/>
         <span>Yes</span>
         <input type="radio" name="yesNo" value="0" />
         <span>No</span>

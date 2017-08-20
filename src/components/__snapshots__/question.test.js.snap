@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`question component rendering 1`] = `
+<div>
+  <span>
+    Do you have any children?
+  </span>
+  <input
+    className="caption"
+    name="yesNo"
+    onClick={[Function]}
+    type="radio"
+    value="1"
+  />
+  <span>
+    Yes
+  </span>
+  <input
+    name="yesNo"
+    type="radio"
+    value="0"
+  />
+  <span>
+    No
+  </span>
+</div>
+`;
